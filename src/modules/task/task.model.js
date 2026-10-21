@@ -1,8 +1,4 @@
-import express from 'express';
-import mongoose from 'mongoose';
-const app = express();
-const port = 3000;
-
+import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
     title: {
@@ -53,17 +49,6 @@ const taskSchema = new mongoose.Schema({
     },
 );
 
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Wellcome to the mongoose server!' });
-});
+const Task = mongoose.model('Tasks', taskSchema);
 
-const main = async () => {
-    await mongoose.connect('mongodb+srv://first_mongoose:IzWqIzKJdid6hNJq@cluster0.xkqahqv.mongodb.net/?appName=Cluster0');
-    console.log('Connected to the database');
-
-    app.listen(port, () => {
-        console.log(`Example app listening at http://localhost:${port}`);
-    });
-}
-
-main();
+export default Task;
